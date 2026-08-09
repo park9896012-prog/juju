@@ -1,0 +1,6 @@
+{
+  "name": "VS Code x Claude Code 가이드",
+  "description": "Visual Studio Code와 Claude Code의 연동 및 활용법을 초보자도 이해하기 쉽게 설명하는 종합 가이드 및 애드센스 최적화 웹사이트.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
