@@ -138,15 +138,6 @@ export const Header: React.FC<HeaderProps> = ({
                 >
                   사이트 소개
                 </button>
-                <button
-                  onClick={() => {
-                    onOpenPolicyModal('contact');
-                    setPolicyDropdownOpen(false);
-                  }}
-                  className="block w-full rounded-lg px-3 py-2 text-left text-xs text-slate-700 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800"
-                >
-                  문의하기 (Contact)
-                </button>
               </div>
             )}
           </div>
@@ -231,15 +222,6 @@ export const Header: React.FC<HeaderProps> = ({
               className="text-left py-1 text-slate-600 dark:text-slate-400"
             >
               사이트 소개
-            </button>
-            <button
-              onClick={() => {
-                onOpenPolicyModal('contact');
-                setMobileMenuOpen(false);
-              }}
-              className="text-left py-1 text-slate-600 dark:text-slate-400"
-            >
-              문의하기 (Contact)
             </button>
           </div>
         </div>
