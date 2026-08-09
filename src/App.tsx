@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { NavigationTab, AdSenseConfig } from './types';
+import { NavigationTab } from './types';
 import { GUIDE_STEPS, SHORTCUTS_DATA, FAQ_DATA } from './data/guideContent';
 import { PRIVACY_POLICY, TERMS_OF_SERVICE, DISCLAIMER_POLICY, ABOUT_US, LegalPageContent } from './data/policyContent';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
 import { CodeBlock } from './components/CodeBlock';
-import { AdSenseBanner } from './components/AdSenseBanner';
 import { InteractiveTerminal } from './components/InteractiveTerminal';
 import { VSCodeDiagram } from './components/VSCodeDiagram';
 import { TableOfContents } from './components/TableOfContents';
@@ -33,16 +32,6 @@ export default function App() {
   const [searchQuery, setSearchQuery] = useState('');
   const [isDarkMode, setIsDarkMode] = useState(true);
   const [activeStepId, setActiveStepId] = useState<string>(GUIDE_STEPS[0].id);
-
-  // AdSense configuration state
-  const [adConfig, setAdConfig] = useState<AdSenseConfig>({
-    publisherId: 'ca-pub-1234567890123456',
-    isLiveMode: false,
-    headerSlotId: '1001',
-    inArticleSlotId: '1002',
-    sidebarSlotId: '1003',
-    autoAdsEnabled: true
-  });
 
   const [policyModalState, setPolicyModalState] = useState<{
     isOpen: boolean;
@@ -100,14 +89,10 @@ export default function App() {
         onSearchChange={setSearchQuery}
         isDarkMode={isDarkMode}
         onToggleDarkMode={() => setIsDarkMode(!isDarkMode)}
-        adConfig={adConfig}
         onOpenPolicyModal={handleOpenPolicy}
       />
 
       <main className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
-        {/* Top Header AdSense Leaderboard Placement */}
-        <AdSenseBanner type="header" config={adConfig} />
-
         {/* Hero Banner Section */}
         <section className="my-6 relative overflow-hidden rounded-3xl border border-indigo-500/20 bg-gradient-to-r from-indigo-900/40 via-purple-900/30 to-slate-900 p-8 shadow-2xl">
           <div className="absolute -right-12 -top-12 h-64 w-64 rounded-full bg-indigo-500/10 blur-3xl"></div>
@@ -216,7 +201,6 @@ export default function App() {
                   if (el) el.scrollIntoView({ behavior: 'smooth' });
                 }}
               />
-              <AdSenseBanner type="sidebar" config={adConfig} />
             </div>
 
             {/* Main Guide Content Cards on Right */}
@@ -318,13 +302,6 @@ export default function App() {
                       ))}
                     </div>
                   )}
-
-                  {/* Insert AdSense Banner after Step 2 */}
-                  {step.stepNumber === 2 && (
-                    <div className="mt-8">
-                      <AdSenseBanner type="in-article" config={adConfig} />
-                    </div>
-                  )}
                 </article>
               ))}
             </div>
@@ -424,7 +401,7 @@ export default function App() {
       </main>
 
       {/* Footer */}
-      <Footer onOpenPolicyModal={handleOpenPolicy} adConfig={adConfig} />
+      <Footer onOpenPolicyModal={handleOpenPolicy} />
 
       {/* Modals */}
       <PolicyModal

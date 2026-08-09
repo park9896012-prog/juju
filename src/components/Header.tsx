@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { NavigationTab, AdSenseConfig } from '../types';
+import { NavigationTab } from '../types';
 import {
   Code2,
   Search,
@@ -21,7 +21,6 @@ interface HeaderProps {
   onSearchChange: (q: string) => void;
   isDarkMode: boolean;
   onToggleDarkMode: () => void;
-  adConfig: AdSenseConfig;
   onOpenPolicyModal: (type: 'privacy' | 'terms' | 'about' | 'contact') => void;
 }
 
@@ -32,7 +31,6 @@ export const Header: React.FC<HeaderProps> = ({
   onSearchChange,
   isDarkMode,
   onToggleDarkMode,
-  adConfig,
   onOpenPolicyModal
 }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -59,9 +57,6 @@ export const Header: React.FC<HeaderProps> = ({
               <h1 className="text-base font-extrabold tracking-tight text-slate-900 dark:text-slate-100">
                 VS Code <span className="text-indigo-600 dark:text-indigo-400">x</span> Claude Code
               </h1>
-              <span className="rounded-full bg-amber-500/10 px-2 py-0.5 text-[10px] font-extrabold text-amber-600 dark:bg-amber-500/20 dark:text-amber-300">
-                AdSense Ready
-              </span>
             </div>
             <p className="text-[11px] font-medium text-slate-500 dark:text-slate-400">
               초보자를 위한 완벽 연동 및 코딩 가이드

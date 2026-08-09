@@ -43,15 +43,6 @@ export interface ShortcutItem {
   category: 'VS Code' | 'Claude Code Terminal' | 'General';
 }
 
-export interface AdSenseConfig {
-  publisherId: string; // e.g. ca-pub-1234567890123456
-  isLiveMode: boolean;
-  headerSlotId: string;
-  inArticleSlotId: string;
-  sidebarSlotId: string;
-  autoAdsEnabled: boolean;
-}
-
 export interface CommandHistory {
   command: string;
   response: string;

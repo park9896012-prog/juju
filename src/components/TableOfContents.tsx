@@ -1,6 +1,6 @@
 import React from 'react';
 import { GuideStep } from '../types';
-import { List, CheckCircle2, ChevronRight } from 'lucide-react';
+import { List, ChevronRight } from 'lucide-react';
 
 interface TableOfContentsProps {
   steps: GuideStep[];
@@ -56,14 +56,6 @@ export const TableOfContents: React.FC<TableOfContentsProps> = ({
           );
         })}
       </nav>
-
-      <div className="mt-5 rounded-xl bg-slate-50 p-3 text-[11px] text-slate-500 dark:bg-slate-950 dark:text-slate-400 border border-slate-100 dark:border-slate-800">
-        <div className="flex items-center space-x-1 font-semibold text-slate-700 dark:text-slate-300 mb-1">
-          <CheckCircle2 className="h-3.5 w-3.5 text-emerald-500" />
-          <span>구글 애드센스 검증 완료</span>
-        </div>
-        <p className="text-[10px]">본 가이드는 구글 품질 기준(1,500자 이상 및 명확한 구조)을 준수합니다.</p>
-      </div>
     </div>
   );
 };
