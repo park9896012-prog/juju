@@ -6,11 +6,9 @@ import { Header } from './components/Header';
 import { Footer } from './components/Footer';
 import { CodeBlock } from './components/CodeBlock';
 import { AdSenseBanner } from './components/AdSenseBanner';
-import { AdSenseSettingsModal } from './components/AdSenseSettingsModal';
 import { InteractiveTerminal } from './components/InteractiveTerminal';
 import { VSCodeDiagram } from './components/VSCodeDiagram';
 import { TableOfContents } from './components/TableOfContents';
-import { AdSenseChecklistCard } from './components/AdSenseChecklistCard';
 import { PolicyModal } from './components/PolicyModal';
 
 import {
@@ -22,7 +20,6 @@ import {
   Terminal,
   BookOpen,
   ArrowRight,
-  ShieldCheck,
   Zap,
   Search,
   ExternalLink,
@@ -47,7 +44,6 @@ export default function App() {
     autoAdsEnabled: true
   });
 
-  const [isAdSenseModalOpen, setIsAdSenseModalOpen] = useState(false);
   const [policyModalState, setPolicyModalState] = useState<{
     isOpen: boolean;
     content: LegalPageContent;
@@ -104,7 +100,6 @@ export default function App() {
         onSearchChange={setSearchQuery}
         isDarkMode={isDarkMode}
         onToggleDarkMode={() => setIsDarkMode(!isDarkMode)}
-        onOpenAdSenseSettings={() => setIsAdSenseModalOpen(true)}
         adConfig={adConfig}
         onOpenPolicyModal={handleOpenPolicy}
       />
@@ -193,17 +188,6 @@ export default function App() {
           >
             <Key className="h-4 w-4" />
             <span>단축키 모음집</span>
-          </button>
-          <button
-            onClick={() => setActiveTab('adsense-checklist')}
-            className={`flex items-center space-x-2 rounded-xl px-4 py-2.5 text-xs font-bold transition shrink-0 ${
-              activeTab === 'adsense-checklist'
-                ? 'bg-indigo-600 text-white shadow-md'
-                : 'bg-slate-100 text-slate-700 dark:bg-slate-900 dark:text-slate-300'
-            }`}
-          >
-            <ShieldCheck className="h-4 w-4" />
-            <span>애드센스 진단표</span>
           </button>
           <button
             onClick={() => setActiveTab('faq')}
@@ -411,10 +395,7 @@ export default function App() {
           </div>
         )}
 
-        {/* TAB 5: AdSense Audit Checklist Card */}
-        {activeTab === 'adsense-checklist' && <AdSenseChecklistCard />}
-
-        {/* TAB 6: FAQ */}
+        {/* TAB 5: FAQ */}
         {activeTab === 'faq' && (
           <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900">
             <div className="mb-6 border-b border-slate-100 pb-4 dark:border-slate-800">
@@ -446,13 +427,6 @@ export default function App() {
       <Footer onOpenPolicyModal={handleOpenPolicy} adConfig={adConfig} />
 
       {/* Modals */}
-      <AdSenseSettingsModal
-        isOpen={isAdSenseModalOpen}
-        onClose={() => setIsAdSenseModalOpen(false)}
-        config={adConfig}
-        onSave={setAdConfig}
-      />
-
       <PolicyModal
         isOpen={policyModalState.isOpen}
         onClose={() => setPolicyModalState({ ...policyModalState, isOpen: false })}

@@ -3,8 +3,6 @@ import { NavigationTab, AdSenseConfig } from '../types';
 import {
   Code2,
   Search,
-  Settings,
-  ShieldCheck,
   Menu,
   X,
   Sun,
@@ -23,7 +21,6 @@ interface HeaderProps {
   onSearchChange: (q: string) => void;
   isDarkMode: boolean;
   onToggleDarkMode: () => void;
-  onOpenAdSenseSettings: () => void;
   adConfig: AdSenseConfig;
   onOpenPolicyModal: (type: 'privacy' | 'terms' | 'about' | 'contact') => void;
 }
@@ -35,7 +32,6 @@ export const Header: React.FC<HeaderProps> = ({
   onSearchChange,
   isDarkMode,
   onToggleDarkMode,
-  onOpenAdSenseSettings,
   adConfig,
   onOpenPolicyModal
 }) => {
@@ -47,7 +43,6 @@ export const Header: React.FC<HeaderProps> = ({
     { id: 'vscode-setup', label: 'VS Code 구조', icon: <Code2 className="h-4 w-4" /> },
     { id: 'interactive-demo', label: '체험 터미널', icon: <Terminal className="h-4 w-4" /> },
     { id: 'shortcuts', label: '단축키', icon: <Sparkles className="h-4 w-4" /> },
-    { id: 'adsense-checklist', label: '애드센스 진단', icon: <ShieldCheck className="h-4 w-4" /> },
     { id: 'faq', label: '자주 묻는 질문', icon: <HelpCircle className="h-4 w-4" /> }
   ];
 
@@ -160,16 +155,6 @@ export const Header: React.FC<HeaderProps> = ({
               </div>
             )}
           </div>
-
-          {/* AdSense Settings Button */}
-          <button
-            onClick={onOpenAdSenseSettings}
-            className="flex items-center space-x-1.5 rounded-lg bg-amber-500/10 px-3 py-1.5 text-xs font-bold text-amber-700 border border-amber-500/30 hover:bg-amber-500/20 dark:bg-amber-500/20 dark:text-amber-300 transition"
-            title="구글 애드센스 설정 및 테스트"
-          >
-            <Settings className="h-3.5 w-3.5" />
-            <span className="hidden sm:inline">애드센스 설정</span>
-          </button>
 
           {/* Dark Mode Toggle */}
           <button

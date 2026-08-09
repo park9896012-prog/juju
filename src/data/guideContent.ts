@@ -1,4 +1,4 @@
-import { GuideStep, FAQItem, ShortcutItem, AdSenseCriterion } from '../types';
+import { GuideStep, FAQItem, ShortcutItem } from '../types';
 
 export const GUIDE_STEPS: GuideStep[] = [
   {
@@ -294,48 +294,5 @@ export const FAQ_DATA: FAQItem[] = [
     question: 'CLAUDE.md 파일은 꼭 만들어야 하나요?',
     answer: '필수는 아니지만 강력히 권장됩니다! CLAUDE.md 파일이 없으면 Claude가 매번 프로젝트 구성이나 패키지 매니저(npm/yarn/pnpm)를 추측해야 하므로 불필요한 토큰이 소비되고 오류 확률이 높아집니다. `/init`으로 5초만에 만들 수 있습니다.',
     category: 'setup'
-  }
-];
-
-export const ADSENSE_AUDIT_CHECKLIST: AdSenseCriterion[] = [
-  {
-    id: 'content-depth',
-    title: '풍부하고 독창적인 고품질 콘텐츠 (Content Richness)',
-    description: '최소 1,500자 이상의 가치 있는 텍스트, 코드 설명, 시각 자료 및 문제 해결 가이드가 마련되어 있는가?',
-    status: 'passed',
-    weight: 25,
-    tip: '단계별 튜토리얼과 코드 설명이 풍부하여 구글 품질 가이드라인을 완벽하게 만족합니다.'
-  },
-  {
-    id: 'privacy-policy',
-    title: '필수 법적 방침 페이지 구축 (Privacy & Legal Pages)',
-    description: '개인정보처리방침, 이용약관, 사이트 소개, 문의하기, DART 쿠키 고지가 구체적으로 제공되는가?',
-    status: 'passed',
-    weight: 25,
-    tip: '하단 푸터 및 상단 메뉴를 통해 누구나 손쉽게 수집 정보 및 광고 정책을 확인할 수 있습니다.'
-  },
-  {
-    id: 'navigation-ux',
-    title: '명확한 사이트 구조 및 탐색 편의성 (Navigation & UX)',
-    description: '사용자가 원하는 정보를 빠르게 찾을 수 있도록 상단 메뉴, 목차(TOC), 검색 기능이 정상 동작하는가?',
-    status: 'passed',
-    weight: 20,
-    tip: '실시간 검색, 대화형 목차 및 모바일 전용 반응형 메뉴로 승인 요건을 갖췄습니다.'
-  },
-  {
-    id: 'responsive-design',
-    title: '모바일 및 다양한 기기 반응형 레이아웃 (Responsive Layout)',
-    description: '스마트폰, 태블릿, 데스크톱 화면에서 레이아웃 깨짐 없이 광고 및 내용이 자연스럽게 배치되는가?',
-    status: 'passed',
-    weight: 15,
-    tip: 'Tailwind CSS 기반 fluid grid 및 스마트 터치 타겟 규격을 적용했습니다.'
-  },
-  {
-    id: 'ad-disclosure',
-    title: '광고 명시성 및 사용자 경험 보호 (Ad Labeling)',
-    description: '광고 영역이 [AD / 광고] 라벨로 투명하게 표시되어 콘텐츠와 명확히 구분되는가?',
-    status: 'passed',
-    weight: 15,
-    tip: '구글 애드센스 정책에 맞게 [광고 / SPONSORED] 표식을 포함한 애드센스 컨테이너가 제공됩니다.'
   }
 ];

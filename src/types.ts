@@ -1,9 +1,8 @@
-export type NavigationTab = 
-  | 'guide' 
-  | 'vscode-setup' 
-  | 'interactive-demo' 
-  | 'shortcuts' 
-  | 'adsense-checklist' 
+export type NavigationTab =
+  | 'guide'
+  | 'vscode-setup'
+  | 'interactive-demo'
+  | 'shortcuts'
   | 'faq'
   | 'policy-privacy'
   | 'policy-terms'
@@ -51,15 +50,6 @@ export interface AdSenseConfig {
   inArticleSlotId: string;
   sidebarSlotId: string;
   autoAdsEnabled: boolean;
-}
-
-export interface AdSenseCriterion {
-  id: string;
-  title: string;
-  description: string;
-  status: 'passed' | 'warning' | 'pending';
-  weight: number;
-  tip: string;
 }
 
 export interface CommandHistory {
