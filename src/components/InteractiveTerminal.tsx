@@ -1,15 +1,20 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Terminal, Play, Sparkles, Folder, FileText, Check, Cpu, DollarSign, RotateCcw, HelpCircle, Code2, ShieldAlert } from 'lucide-react';
 import { CommandHistory } from '../types';
+import { useLanguage } from '../i18n';
+import { UI_TEXT } from '../data/uiText';
 
 export const InteractiveTerminal: React.FC = () => {
+  const { language } = useLanguage();
+  const t = UI_TEXT[language].terminal;
+
   const [inputVal, setInputVal] = useState('');
   const [activeFile, setActiveFile] = useState('App.tsx');
   const [fileContents, setFileContents] = useState<Record<string, string>>({
     'App.tsx': `export default function App() {\n  return (\n    <div className="p-4">\n      <h1 className="text-2xl font-bold">Hello VS Code x Claude Code</h1>\n    </div>\n  );\n}`,
     'CLAUDE.md': `# Project Rules\n- Use React + TypeScript + Tailwind CSS\n- Run dev server with 'npm run dev'`
   });
-  
+
   const [history, setHistory] = useState<CommandHistory[]>([
     {
       command: 'claude',
@@ -35,8 +40,8 @@ export const InteractiveTerminal: React.FC = () => {
     const targetCmd = cmdToRun || inputVal;
     if (!targetCmd.trim() || isProcessing) return;
 
-    const timeStr = new Date().toLocaleTimeString('ko-KR', { hour12: false });
-    
+    const timeStr = new Date().toLocaleTimeString(t.localeTag, { hour12: false });
+
     // Add user command to history
     setHistory((prev) => [
       ...prev,
@@ -92,7 +97,7 @@ export const InteractiveTerminal: React.FC = () => {
             <div className="h-3 w-3 rounded-full bg-emerald-500"></div>
           </div>
           <span className="ml-2 font-mono text-xs text-slate-400">
-            VS Code Editor — my-awesome-app (Claude Code Live Simulator)
+            {t.windowTitle}
           </span>
         </div>
         <div className="flex items-center space-x-2 text-xs text-emerald-400">
@@ -100,7 +105,7 @@ export const InteractiveTerminal: React.FC = () => {
             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75"></span>
             <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500"></span>
           </span>
-          <span className="font-mono text-[11px]">Claude Agent Active</span>
+          <span className="font-mono text-[11px]">{t.agentActive}</span>
         </div>
       </div>
 
@@ -110,7 +115,7 @@ export const InteractiveTerminal: React.FC = () => {
         <div className="border-r border-slate-800 bg-slate-900/70 p-3 text-xs">
           <div className="mb-2 flex items-center space-x-1 font-bold uppercase tracking-wider text-slate-400 text-[11px]">
             <Folder className="h-3.5 w-3.5 text-blue-400" />
-            <span>EXPLORER</span>
+            <span>{t.explorer}</span>
           </div>
           <div className="space-y-1 font-mono">
             {Object.keys(fileContents).map((fileName) => (
@@ -130,27 +135,27 @@ export const InteractiveTerminal: React.FC = () => {
           </div>
 
           <div className="mt-8 border-t border-slate-800/80 pt-3">
-            <div className="text-[11px] font-semibold text-slate-400 mb-2">원클릭 시뮬레이션 버튼:</div>
+            <div className="text-[11px] font-semibold text-slate-400 mb-2">{t.presetLabel}</div>
             <div className="space-y-1.5">
               <button
-                onClick={() => runPresetCommand('claude "App.tsx에 다크모드 버튼 추가해줘"')}
+                onClick={() => runPresetCommand(t.presetDarkModePrompt)}
                 className="w-full text-left rounded-md bg-slate-800 p-2 text-[11px] text-amber-300 hover:bg-slate-700 transition flex items-center justify-between"
               >
-                <span>⚡ 다크모드 기능 구현</span>
+                <span>{t.presetDarkMode}</span>
                 <Sparkles className="h-3 w-3" />
               </button>
               <button
                 onClick={() => runPresetCommand('/init')}
                 className="w-full text-left rounded-md bg-slate-800 p-2 text-[11px] text-emerald-300 hover:bg-slate-700 transition flex items-center justify-between"
               >
-                <span>📜 /init (CLAUDE.md 생성)</span>
+                <span>{t.presetInit}</span>
                 <Code2 className="h-3 w-3" />
               </button>
               <button
                 onClick={() => runPresetCommand('/cost')}
                 className="w-full text-left rounded-md bg-slate-800 p-2 text-[11px] text-sky-300 hover:bg-slate-700 transition flex items-center justify-between"
               >
-                <span>💵 /cost (사용량 조회)</span>
+                <span>{t.presetCost}</span>
                 <DollarSign className="h-3 w-3" />
               </button>
             </div>
@@ -179,7 +184,7 @@ export const InteractiveTerminal: React.FC = () => {
             <div className="flex items-center justify-between border-b border-slate-800/80 px-4 py-1.5 text-[11px] text-slate-400 bg-slate-900">
               <div className="flex items-center space-x-2">
                 <Terminal className="h-3.5 w-3.5 text-emerald-400" />
-                <span className="font-semibold text-slate-200">INTEGRATED TERMINAL (Claude Code CLI)</span>
+                <span className="font-semibold text-slate-200">{t.terminalPanelTitle}</span>
               </div>
               <span className="text-[10px] text-slate-500 font-mono">zsh / bash</span>
             </div>
@@ -205,7 +210,7 @@ export const InteractiveTerminal: React.FC = () => {
               {isProcessing && (
                 <div className="flex items-center space-x-2 text-amber-400 text-xs font-mono py-1">
                   <Cpu className="h-3.5 w-3.5 animate-spin" />
-                  <span>Claude Code agent is inspecting project files & writing code...</span>
+                  <span>{t.processing}</span>
                 </div>
               )}
               <div ref={terminalEndRef} />
@@ -224,7 +229,7 @@ export const InteractiveTerminal: React.FC = () => {
                 type="text"
                 value={inputVal}
                 onChange={(e) => setInputVal(e.target.value)}
-                placeholder="예: claude '버그 수정해줘' 또는 /init, /cost 입력 후 Enter"
+                placeholder={t.inputPlaceholder}
                 className="w-full bg-transparent px-2 font-mono text-xs text-slate-100 placeholder-slate-600 focus:outline-none"
               />
               <button

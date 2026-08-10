@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { NavigationTab } from '../types';
+import { useLanguage } from '../i18n';
+import { UI_TEXT } from '../data/uiText';
 import {
   Code2,
   Search,
@@ -11,7 +13,8 @@ import {
   HelpCircle,
   FileText,
   ChevronDown,
-  Sparkles
+  Sparkles,
+  Globe
 } from 'lucide-react';
 
 interface HeaderProps {
@@ -33,15 +36,17 @@ export const Header: React.FC<HeaderProps> = ({
   onToggleDarkMode,
   onOpenPolicyModal
 }) => {
+  const { language, setLanguage } = useLanguage();
+  const t = UI_TEXT[language];
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [policyDropdownOpen, setPolicyDropdownOpen] = useState(false);
 
   const navItems: { id: NavigationTab; label: string; icon: React.ReactNode }[] = [
-    { id: 'guide', label: '연동 가이드', icon: <FileText className="h-4 w-4" /> },
-    { id: 'vscode-setup', label: 'VS Code 구조', icon: <Code2 className="h-4 w-4" /> },
-    { id: 'interactive-demo', label: '체험 터미널', icon: <Terminal className="h-4 w-4" /> },
-    { id: 'shortcuts', label: '단축키', icon: <Sparkles className="h-4 w-4" /> },
-    { id: 'faq', label: '자주 묻는 질문', icon: <HelpCircle className="h-4 w-4" /> }
+    { id: 'guide', label: t.header.navGuide, icon: <FileText className="h-4 w-4" /> },
+    { id: 'vscode-setup', label: t.header.navVscode, icon: <Code2 className="h-4 w-4" /> },
+    { id: 'interactive-demo', label: t.header.navDemo, icon: <Terminal className="h-4 w-4" /> },
+    { id: 'shortcuts', label: t.header.navShortcuts, icon: <Sparkles className="h-4 w-4" /> },
+    { id: 'faq', label: t.header.navFaq, icon: <HelpCircle className="h-4 w-4" /> }
   ];
 
   return (
@@ -59,7 +64,7 @@ export const Header: React.FC<HeaderProps> = ({
               </h1>
             </div>
             <p className="text-[11px] font-medium text-slate-500 dark:text-slate-400">
-              초보자를 위한 완벽 연동 및 코딩 가이드
+              {t.header.tagline}
             </p>
           </div>
         </div>
@@ -71,7 +76,7 @@ export const Header: React.FC<HeaderProps> = ({
             type="text"
             value={searchQuery}
             onChange={(e) => onSearchChange(e.target.value)}
-            placeholder="가이드 및 명령어 검색..."
+            placeholder={t.header.searchPlaceholder}
             className="w-full rounded-full border border-slate-200 bg-slate-50 pl-9 pr-4 py-1.5 text-xs text-slate-800 placeholder-slate-400 focus:border-indigo-500 focus:bg-white focus:outline-none dark:border-slate-800 dark:bg-slate-900 dark:text-slate-200 dark:placeholder-slate-500"
           />
         </div>
@@ -99,13 +104,42 @@ export const Header: React.FC<HeaderProps> = ({
 
         {/* Actions & Settings Right Side */}
         <div className="flex items-center space-x-2">
+          {/* Language Switcher */}
+          <div
+            className="hidden sm:flex items-center rounded-lg border border-slate-200 p-0.5 dark:border-slate-800"
+            role="group"
+            aria-label={t.header.langSwitchLabel}
+          >
+            <Globe className="h-3.5 w-3.5 mx-1.5 text-slate-400" />
+            <button
+              onClick={() => setLanguage('ko')}
+              className={`rounded-md px-2 py-1 text-[11px] font-bold transition ${
+                language === 'ko'
+                  ? 'bg-indigo-600 text-white'
+                  : 'text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-100'
+              }`}
+            >
+              KO
+            </button>
+            <button
+              onClick={() => setLanguage('en')}
+              className={`rounded-md px-2 py-1 text-[11px] font-bold transition ${
+                language === 'en'
+                  ? 'bg-indigo-600 text-white'
+                  : 'text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-100'
+              }`}
+            >
+              EN
+            </button>
+          </div>
+
           {/* Policy Dropdown Menu */}
           <div className="relative">
             <button
               onClick={() => setPolicyDropdownOpen(!policyDropdownOpen)}
               className="flex items-center space-x-1 rounded-lg border border-slate-200 px-2.5 py-1.5 text-xs font-medium text-slate-700 hover:bg-slate-100 dark:border-slate-800 dark:text-slate-300 dark:hover:bg-slate-900"
             >
-              <span>법적 방침</span>
+              <span>{t.header.legalMenu}</span>
               <ChevronDown className="h-3.5 w-3.5" />
             </button>
 
@@ -118,7 +152,7 @@ export const Header: React.FC<HeaderProps> = ({
                   }}
                   className="block w-full rounded-lg px-3 py-2 text-left text-xs text-slate-700 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800"
                 >
-                  개인정보처리방침
+                  {t.header.privacyPolicy}
                 </button>
                 <button
                   onClick={() => {
@@ -127,7 +161,7 @@ export const Header: React.FC<HeaderProps> = ({
                   }}
                   className="block w-full rounded-lg px-3 py-2 text-left text-xs text-slate-700 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800"
                 >
-                  이용약관
+                  {t.header.termsOfService}
                 </button>
                 <button
                   onClick={() => {
@@ -136,7 +170,7 @@ export const Header: React.FC<HeaderProps> = ({
                   }}
                   className="block w-full rounded-lg px-3 py-2 text-left text-xs text-slate-700 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800"
                 >
-                  사이트 소개
+                  {t.header.aboutUs}
                 </button>
               </div>
             )}
@@ -146,7 +180,7 @@ export const Header: React.FC<HeaderProps> = ({
           <button
             onClick={onToggleDarkMode}
             className="rounded-lg p-2 text-slate-500 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-900"
-            title={isDarkMode ? '라이트 모드' : '다크 모드'}
+            title={isDarkMode ? t.header.lightMode : t.header.darkMode}
           >
             {isDarkMode ? <Sun className="h-4 w-4 text-amber-400" /> : <Moon className="h-4 w-4" />}
           </button>
@@ -170,9 +204,30 @@ export const Header: React.FC<HeaderProps> = ({
               type="text"
               value={searchQuery}
               onChange={(e) => onSearchChange(e.target.value)}
-              placeholder="가이드 검색..."
+              placeholder={t.header.searchPlaceholderMobile}
               className="w-full rounded-lg border border-slate-200 bg-slate-50 pl-9 pr-4 py-2 text-xs text-slate-800 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-200"
             />
+          </div>
+
+          {/* Language Switcher (mobile) */}
+          <div className="flex items-center rounded-lg border border-slate-200 p-0.5 w-fit dark:border-slate-800" role="group" aria-label={t.header.langSwitchLabel}>
+            <Globe className="h-3.5 w-3.5 mx-1.5 text-slate-400" />
+            <button
+              onClick={() => setLanguage('ko')}
+              className={`rounded-md px-2.5 py-1 text-[11px] font-bold transition ${
+                language === 'ko' ? 'bg-indigo-600 text-white' : 'text-slate-500 dark:text-slate-400'
+              }`}
+            >
+              한국어
+            </button>
+            <button
+              onClick={() => setLanguage('en')}
+              className={`rounded-md px-2.5 py-1 text-[11px] font-bold transition ${
+                language === 'en' ? 'bg-indigo-600 text-white' : 'text-slate-500 dark:text-slate-400'
+              }`}
+            >
+              English
+            </button>
           </div>
 
           <div className="grid grid-cols-2 gap-2">
@@ -203,7 +258,7 @@ export const Header: React.FC<HeaderProps> = ({
               }}
               className="text-left py-1 text-slate-600 dark:text-slate-400"
             >
-              개인정보처리방침
+              {t.header.privacyPolicy}
             </button>
             <button
               onClick={() => {
@@ -212,7 +267,7 @@ export const Header: React.FC<HeaderProps> = ({
               }}
               className="text-left py-1 text-slate-600 dark:text-slate-400"
             >
-              이용약관
+              {t.header.termsOfService}
             </button>
             <button
               onClick={() => {
@@ -221,7 +276,7 @@ export const Header: React.FC<HeaderProps> = ({
               }}
               className="text-left py-1 text-slate-600 dark:text-slate-400"
             >
-              사이트 소개
+              {t.header.aboutUs}
             </button>
           </div>
         </div>

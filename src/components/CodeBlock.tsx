@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { Check, Copy, Terminal, FileCode } from 'lucide-react';
+import { useLanguage } from '../i18n';
+import { UI_TEXT } from '../data/uiText';
 
 interface CodeBlockProps {
   code: string;
@@ -14,6 +16,8 @@ export const CodeBlock: React.FC<CodeBlockProps> = ({
   filename,
   description
 }) => {
+  const { language: uiLang } = useLanguage();
+  const t = UI_TEXT[uiLang].codeBlock;
   const [copied, setCopied] = useState(false);
 
   const handleCopy = () => {
@@ -41,17 +45,17 @@ export const CodeBlock: React.FC<CodeBlockProps> = ({
         <button
           onClick={handleCopy}
           className="flex items-center space-x-1.5 rounded-md bg-slate-800/80 px-2.5 py-1 text-slate-300 transition hover:bg-slate-700 hover:text-white"
-          title="코드 복사"
+          title={t.copyTitle}
         >
           {copied ? (
             <>
               <Check className="h-3.5 w-3.5 text-emerald-400" />
-              <span className="text-emerald-400 font-medium">복사됨!</span>
+              <span className="text-emerald-400 font-medium">{t.copied}</span>
             </>
           ) : (
             <>
               <Copy className="h-3.5 w-3.5" />
-              <span>복사</span>
+              <span>{t.copy}</span>
             </>
           )}
         </button>

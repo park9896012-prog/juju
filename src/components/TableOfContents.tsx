@@ -1,5 +1,7 @@
 import React from 'react';
 import { GuideStep } from '../types';
+import { useLanguage } from '../i18n';
+import { UI_TEXT } from '../data/uiText';
 import { List, ChevronRight } from 'lucide-react';
 
 interface TableOfContentsProps {
@@ -13,11 +15,14 @@ export const TableOfContents: React.FC<TableOfContentsProps> = ({
   activeStepId,
   onSelectStep
 }) => {
+  const { language } = useLanguage();
+  const t = UI_TEXT[language];
+
   return (
     <div className="sticky top-20 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900">
       <div className="mb-4 flex items-center space-x-2 border-b border-slate-100 pb-3 dark:border-slate-800">
         <List className="h-5 w-5 text-indigo-600 dark:text-indigo-400" />
-        <h3 className="text-base font-bold text-slate-900 dark:text-slate-100">가이드 목차 (TOC)</h3>
+        <h3 className="text-base font-bold text-slate-900 dark:text-slate-100">{t.toc.heading}</h3>
       </div>
 
       <nav className="space-y-1.5">
