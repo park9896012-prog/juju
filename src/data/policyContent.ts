@@ -47,7 +47,7 @@ export const PRIVACY_POLICY: Record<Lang, LegalPageContent> = {
         heading: '4. 이용자의 권리 및 연락처',
         content: [
           '이용자는 언제든지 본인의 개인정보 열람, 정정, 삭제, 처리정지를 요구할 수 있습니다.',
-          '개인정보 보호 정책 관련 문의 사항이나 불편 사항은 [문의하기] 페이지 또는 운영자 이메일(support@claude-vscode-guide.com)로 접수해 주시면 신속하게 답변해 드리겠습니다.'
+          '개인정보 보호 정책 관련 문의 사항이나 불편 사항은 [문의하기] 페이지 또는 운영자 이메일(ju9896012@gmail.com)로 접수해 주시면 신속하게 답변해 드리겠습니다.'
         ]
       }
     ]
@@ -87,7 +87,7 @@ export const PRIVACY_POLICY: Record<Lang, LegalPageContent> = {
         heading: '4. User Rights and Contact',
         content: [
           'You may request to view, correct, delete, or stop the processing of your personal information at any time.',
-          'For any questions or concerns about this privacy policy, please reach us through the [Contact] page or at the operator\'s email (support@claude-vscode-guide.com), and we\'ll respond promptly.'
+          'For any questions or concerns about this privacy policy, please reach us through the [Contact] page or at the operator\'s email (ju9896012@gmail.com), and we\'ll respond promptly.'
         ]
       }
     ]
